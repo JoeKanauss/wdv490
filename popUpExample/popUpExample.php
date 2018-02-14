@@ -1,8 +1,13 @@
 <?php
-$database = "joekan_wdv341"; 
+
+
+// profilepug.png to be replaced with student photo
+
+
+$database = "local_dpd_bio"; 
 $hostname = "localhost";
-$username = "joekan_wdv341"; 
-$password = "wdv341";
+$username = "root"; 
+$password = "";
 
 
 try {
@@ -15,7 +20,7 @@ catch(PDOException $e)
     echo "Connection failed: " . $e->getMessage();
 	}
 	
-$sql = "SELECT photo, name FROM popupexample";
+$sql = "SELECT bio_login_email, bio_first_name, bio_last_name, bio_program, bio_second_program, bio_website_address, bio_second_web, bio_linkedIn, bio_email, bio_hometown, bio_career_goals, bio_three_words FROM local_dpd_bio";
 
 $result = $conn->query($sql);
 
@@ -24,7 +29,7 @@ $galleryItems = array();
 //$gallery = "<table><tr>";
 foreach($result as $row)
 {
-	array_push($galleryItems, $row["photo"]."<h2>".$row["name"]."</h2>");
+	array_push($galleryItems, "<img src='profilepug.png' id='".$row["bio_login_email"]."' onclick='display(this.id);' /> <h2>".$row["bio_first_name"]." ".$row["bio_last_name"]."</h2>");
 }
 
 
@@ -131,9 +136,17 @@ table img {
 <div id="section">
 <input type="button" id="closeSection" value="X">
 <div id="sectionInfo">
-<p><span id="image">Image</span></p>
-<p>Name:<br><span id="name">Name</span></p>
-<p>Words:<br><span id="words">Words</span></p>
+
+<p><span id="image"><img src="profilepug.png" /></span></p>
+<p><span id="fName">First Name</span> <span id="lName">Last Name</span></p>
+<p><span id="program1">Program 1</span> <span id="program2">Program 2</span></p>
+<p><span id="email">Email</span></p>
+<p><span id="websiteAddress1">Website Address 1</span></p>
+<p><span id="websiteAddress2">Website Address 2</span></p>
+<p>Hometown:<br><span id="hometown">Hometown</span></p>
+<p>My Career Goals:<br><span id="careerGoals">Career Goals</span></p>
+<p>Three Words That Describe Me:<br><span id="threeWords">Three Words</span></p>
+<p><span id="linkedIn">LinkedIn</span></p>
 </div>
 </div>
 
